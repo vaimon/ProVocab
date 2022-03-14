@@ -2,8 +2,8 @@ package ru.vaimon.provocab.screens.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import ru.vaimon.provocab.R
 import ru.vaimon.provocab.databinding.ActivityMainBinding
+import ru.vaimon.provocab.models.CambridgeDefinition
 
 class MainActivity : AppCompatActivity(), MainContract.View {
     private lateinit var binding: ActivityMainBinding
@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupUI()
+        setupListeners()
     }
 
     override fun onStart() {
@@ -28,7 +28,17 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         mPresenter.detachView()
     }
 
-    private fun setupUI() {
+    private fun setupListeners() {
+        binding.btnSearch.setOnClickListener {
+            mPresenter.startWordSearch(binding.etWord.text.toString())
+        }
+    }
 
+    override fun showLoadingState() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showTranslation(cambridgeDefinitions: List<CambridgeDefinition>){
+        binding.tvResult.text = cambridgeDefinitions.joinToString(separator = "\n")
     }
 }
