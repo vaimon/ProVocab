@@ -41,4 +41,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun showTranslation(cambridgeDefinitions: List<CambridgeDefinition>){
         binding.tvResult.text = cambridgeDefinitions.joinToString(separator = "\n")
     }
+
+    override fun showError(reason: String) {
+        binding.tvResult.text = reason
+    }
 }

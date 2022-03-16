@@ -17,6 +17,6 @@ class MainPresenter : BasePresenter<MainContract.View>(), MainContract.Presenter
     }
 
     override fun onWordSearchFailure(reason: String) {
-        TODO("Not yet implemented")
+        mView?.showError(reason)
     }
 }

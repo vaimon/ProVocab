@@ -7,6 +7,7 @@ interface MainContract {
     interface View : BaseContract.View {
         fun showLoadingState()
         fun showTranslation(cambridgeDefinitions: List<CambridgeDefinition>)
+        fun showError(reason: String)
     }
 
     interface Presenter : BaseContract.Presenter<View> {
