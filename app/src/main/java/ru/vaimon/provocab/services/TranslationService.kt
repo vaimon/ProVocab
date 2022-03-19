@@ -6,10 +6,14 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface TranslationService {
     @GET("https://dictionary.cambridge.org/dictionary/english/{word}")
     suspend fun getCambridgeWordDefinition(@Path("word") word: String): Response<ResponseBody>
+
+    @GET("https://wooordhunt.ru/word/{word}")
+    suspend fun getWordHuntTranslation(@Path("word") word: String): Response<ResponseBody>
 
     companion object {
         fun create(): TranslationService {

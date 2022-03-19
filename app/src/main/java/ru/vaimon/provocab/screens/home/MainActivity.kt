@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import ru.vaimon.provocab.databinding.ActivityMainBinding
 import ru.vaimon.provocab.models.CambridgeDefinition
+import ru.vaimon.provocab.models.Translation
 
 class MainActivity : AppCompatActivity(), MainContract.View {
     private lateinit var binding: ActivityMainBinding
@@ -38,8 +39,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         TODO("Not yet implemented")
     }
 
-    override fun showTranslation(cambridgeDefinitions: List<CambridgeDefinition>){
-        binding.tvResult.text = cambridgeDefinitions.joinToString(separator = "\n")
+    override fun showTranslation(translation: Translation){
+        binding.tvResult.text = "${translation.word} => [${translation.translations.joinToString(", ")}]\nCambridge: ${translation.cambridgeDefinitions.joinToString(separator = "\n")}\n\n${translation.examples.joinToString("\n")}"
     }
 
     override fun showError(reason: String) {

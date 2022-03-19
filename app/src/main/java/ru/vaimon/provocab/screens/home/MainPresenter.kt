@@ -2,6 +2,7 @@ package ru.vaimon.provocab.screens.home
 
 import ru.vaimon.provocab.base.BasePresenter
 import ru.vaimon.provocab.models.CambridgeDefinition
+import ru.vaimon.provocab.models.Translation
 
 class MainPresenter : BasePresenter<MainContract.View>(), MainContract.Presenter {
 
@@ -12,8 +13,8 @@ class MainPresenter : BasePresenter<MainContract.View>(), MainContract.Presenter
 
     }
 
-    override fun onWordSearchSuccess(definition: List<CambridgeDefinition>) {
-        mView?.showTranslation(definition)
+    override fun onWordSearchSuccess(translation: Translation) {
+        mView?.showTranslation(translation)
     }
 
     override fun onWordSearchFailure(reason: String) {
