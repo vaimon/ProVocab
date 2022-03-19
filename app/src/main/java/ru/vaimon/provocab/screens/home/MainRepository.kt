@@ -14,7 +14,7 @@ import ru.vaimon.provocab.services.TranslationService
 class MainRepository(private val mPresenter: MainPresenter) : MainContract.Repository {
     private val translationService = TranslationService.create()
 
-    private fun parseCambridgeDictionary(response: Response<ResponseBody>): List<CambridgeDefinition> {
+    private fun parseCambridgeDictionary(response: Response<ResponseBody>): Pair<String,List<CambridgeDefinition>> {
         val html = Jsoup.parse(response.body()?.string())
         val selected = html.select("div.def-block.ddef_block")
         val res = mutableListOf<CambridgeDefinition>()
@@ -23,7 +23,11 @@ class MainRepository(private val mPresenter: MainPresenter) : MainContract.Repos
             val example = meaning.select("div.examp.dexamp").first()?.text() ?: ""
             explanation?.let { res.add(CambridgeDefinition(it, example)) }
         }
-        return res
+        html.select("span.sp.dsp").forEach {
+            it.replaceWith(TextNode("|${it.text()}|"))
+        }
+        val transcription = html.select("span.pron.dpron").first().text()
+        return transcription to res
     }
 
     private fun parseWordHuntDictionary(response: Response<ResponseBody>): Pair<List<String>, Set<Example>> {
@@ -42,7 +46,7 @@ class MainRepository(private val mPresenter: MainPresenter) : MainContract.Repos
         }.map { str ->
             val splitted = str.split("—")
             Example(splitted[0].trim(), splitted[1].trim())
-        }.apply { resExamples.addAll(this) }
+        }.let { resExamples.addAll(it) }
         // Translations
         html.select("div.tr > br, div.hidden > br").append("|*|")
         html.select("i").forEach {
@@ -53,7 +57,7 @@ class MainRepository(private val mPresenter: MainPresenter) : MainContract.Repos
             it.isNotEmpty()
         }.map { s ->
             s.trim().removePrefix("- ")
-        }.apply { resTranslations.addAll(this) }
+        }.let { resTranslations.addAll(it) }
         return resTranslations to resExamples
     }
 

@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun showTranslation(translation: Translation){
-        binding.tvResult.text = "${translation.word} => [${translation.translations.joinToString(", ")}]\nCambridge: ${translation.cambridgeDefinitions.joinToString(separator = "\n")}\n\n${translation.examples.joinToString("\n")}"
+        binding.tvResult.text = "${translation.word} ${translation.transcription} => [${translation.translations.joinToString(", ")}]\nCambridge: ${translation.cambridgeDefinitions.joinToString(separator = "\n")}\n\n${translation.examples.joinToString("\n")}"
     }
 
     override fun showError(reason: String) {
