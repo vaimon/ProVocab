@@ -1,7 +1,11 @@
 package ru.vaimon.provocab.screens.home
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.TypedValue
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import ru.vaimon.provocab.databinding.ActivityMainBinding
 import ru.vaimon.provocab.models.CambridgeDefinition
 import ru.vaimon.provocab.models.Translation
@@ -32,6 +36,16 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     private fun setupListeners() {
         binding.btnSearch.setOnClickListener {
             mPresenter.startWordSearch(binding.etWord.text.toString())
+        }
+
+        binding.etWord.setOnEditorActionListener { _, i, _ ->
+            if(i == EditorInfo.IME_ACTION_SEARCH){
+                mPresenter.startWordSearch(binding.etWord.text.toString())
+                val inputMethodManager = applicationContext.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(binding.etWord.windowToken,0)
+                return@setOnEditorActionListener true
+            }
+            return@setOnEditorActionListener false
         }
     }
 
