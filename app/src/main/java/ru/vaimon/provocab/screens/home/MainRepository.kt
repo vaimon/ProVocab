@@ -34,11 +34,7 @@ class MainRepository(private val mPresenter: MainPresenter) : MainContract.Repos
         val html = Jsoup.parse(response.body()?.string())
         val resExamples = mutableSetOf<Example>()
         val resTranslations = mutableListOf<String>()
-        // Sentences
-        val selected = html.select("p.ex_t.human, p.ex_o:not([style])").map { item -> item.text() }
-        for (i in selected.indices step 2) {
-            resExamples.add(Example(selected[i], selected[i + 1]))
-        }
+
         // Collocations
         html.select("div.block.phrases > br").append("|*|")
         html.select("div.block.phrases").text().split("|*|").filter {
@@ -47,6 +43,13 @@ class MainRepository(private val mPresenter: MainPresenter) : MainContract.Repos
             val splitted = str.split("—")
             Example(splitted[0].trim(), splitted[1].trim())
         }.let { resExamples.addAll(it) }
+
+        // Sentences
+        val selected = html.select("p.ex_t.human, p.ex_o:not([style])").map { item -> item.text() }
+        for (i in selected.indices step 2) {
+            resExamples.add(Example(selected[i], selected[i + 1]))
+        }
+
         // Translations
         html.select("div.tr > br, div.hidden > br").append("|*|")
         html.select("i").forEach {
@@ -56,7 +59,8 @@ class MainRepository(private val mPresenter: MainPresenter) : MainContract.Repos
         html.select("div.tr").text().split("|*|").filter {
             it.isNotEmpty()
         }.map { s ->
-            s.trim().removePrefix("- ")
+            //s.trim().removePrefix("- ")
+            s.trim()
         }.let { resTranslations.addAll(it) }
         return resTranslations to resExamples
     }

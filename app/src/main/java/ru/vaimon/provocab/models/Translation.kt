@@ -2,7 +2,7 @@ package ru.vaimon.provocab.models
 
 data class Translation(
     val word: String,
-    val transcription: String,
+    val pronunciation: String,
     val cambridgeDefinitions: List<CambridgeDefinition>,
     val translations: List<String>,
     val examples: Set<Example>
