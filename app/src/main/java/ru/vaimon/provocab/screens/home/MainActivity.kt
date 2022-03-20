@@ -82,7 +82,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun showLoadingState() {
-        TODO("Not yet implemented")
+        binding.progressIndicator.visibility = View.VISIBLE
+        binding.fragTranslation.root.visibility = View.GONE
     }
 
     override fun showTranslation(translation: Translation) {
@@ -91,9 +92,10 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         binding.fragTranslation.tvWord.text = translation.word
         binding.fragTranslation.tvPronunciation.text = translation.pronunciation
         binding.fragTranslation.root.visibility = View.VISIBLE
+        binding.progressIndicator.visibility = View.GONE
     }
 
     override fun showError(reason: String) {
-
+        binding.progressIndicator.visibility = View.GONE
     }
 }

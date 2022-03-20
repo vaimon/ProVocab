@@ -10,7 +10,7 @@ class MainPresenter : BasePresenter<MainContract.View>(), MainContract.Presenter
 
     override fun startWordSearch (word: String){
         mRepository.translateWord(word)
-
+        mView?.showLoadingState()
     }
 
     override fun onWordSearchSuccess(translation: Translation) {

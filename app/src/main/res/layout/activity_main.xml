@@ -12,25 +12,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
+        app:cardBackgroundColor="?colorPrimary"
+        app:cardCornerRadius="32dp"
+        app:cardElevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0"
-        app:cardBackgroundColor="?colorPrimary"
-        app:cardCornerRadius="32dp"
-        app:cardElevation="8dp"
-        >
+        app:layout_constraintVertical_bias="0">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:paddingStart="12dp"
-            android:paddingEnd="12dp"
             android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            >
+            android:paddingEnd="12dp"
+            android:paddingBottom="8dp">
 
             <EditText
                 android:id="@+id/etWord"
@@ -61,21 +59,27 @@
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <include layout="@layout/fragment_translation"
-        android:id="@+id/fragTranslation"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent">
 
-<!--    <TextView-->
-<!--        android:id="@+id/tvResult"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="648dp"-->
-<!--        android:text="Hello World!"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+        <include
+            android:id="@+id/fragTranslation"
+            layout="@layout/fragment_translation"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressIndicator"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:indeterminateTint="?colorPrimary"
+            android:visibility="gone"
+            />
+
+    </FrameLayout>
 
 </LinearLayout>
