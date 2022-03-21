@@ -69,6 +69,10 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             mPresenter.startWordSearch(binding.etWord.text.toString())
         }
 
+        binding.fragTranslation.btnSave.setOnClickListener {
+            mPresenter.saveWord(translationAdapter.currentWord ?: throw IllegalArgumentException("We don't have the word? Impossible."))
+        }
+
         binding.etWord.setOnEditorActionListener { _, i, _ ->
             if (i == EditorInfo.IME_ACTION_SEARCH) {
                 mPresenter.startWordSearch(binding.etWord.text.toString())

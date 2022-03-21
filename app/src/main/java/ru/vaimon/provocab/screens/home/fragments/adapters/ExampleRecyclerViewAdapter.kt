@@ -7,10 +7,6 @@ import ru.vaimon.provocab.R
 import ru.vaimon.provocab.databinding.ItemExampleBinding
 import ru.vaimon.provocab.models.Example
 
-/**
- * [RecyclerView.Adapter] that can display a [PlaceholderItem].
- * TODO: Replace the implementation with code for your data type.
- */
 class ExampleRecyclerViewAdapter(
     var values: List<Example> = listOf()
 ) : RecyclerView.Adapter<ExampleRecyclerViewAdapter.ViewHolder>() {

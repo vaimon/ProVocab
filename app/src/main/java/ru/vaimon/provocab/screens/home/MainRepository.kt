@@ -9,6 +9,7 @@ import retrofit2.Response
 import ru.vaimon.provocab.models.CambridgeDefinition
 import ru.vaimon.provocab.models.Example
 import ru.vaimon.provocab.models.Translation
+import ru.vaimon.provocab.services.RealmService
 import ru.vaimon.provocab.services.TranslationService
 
 class MainRepository(private val mPresenter: MainPresenter) : MainContract.Repository {
@@ -98,5 +99,7 @@ class MainRepository(private val mPresenter: MainPresenter) : MainContract.Repos
         }
     }
 
-
+    override fun saveWord(word: Translation){
+        RealmService.putTranslation(word)
+    }
 }

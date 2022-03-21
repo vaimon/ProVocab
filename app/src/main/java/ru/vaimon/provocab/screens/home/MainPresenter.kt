@@ -13,6 +13,10 @@ class MainPresenter : BasePresenter<MainContract.View>(), MainContract.Presenter
         mView?.showLoadingState()
     }
 
+    override fun saveWord(word: Translation){
+        mRepository.saveWord(word)
+    }
+
     override fun onWordSearchSuccess(translation: Translation) {
         mView?.showTranslation(translation)
     }

@@ -1,15 +1,28 @@
 package ru.vaimon.provocab.models
 
-data class Translation(
-    val word: String,
-    val pronunciation: String,
-    val cambridgeDefinitions: List<CambridgeDefinition>,
-    val translations: List<String>,
-    val examples: Set<Example>
-) {
+import io.realm.RealmList
+import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
+import org.bson.types.ObjectId
+
+open class Translation(
+    @PrimaryKey
+    var word: String,
+    var pronunciation: String,
+    var cambridgeDefinitions: RealmList<CambridgeDefinition>,
+    var translations: RealmList<String>,
+    var examples: RealmList<Example>,
+) : RealmObject() {
+
     constructor(
         word: String,
-        cambridge: Pair<String,List<CambridgeDefinition>>,
+        cambridge: Pair<String, List<CambridgeDefinition>>,
         wordHunt: Pair<List<String>, Set<Example>>
-    ) : this(word, cambridge.first, cambridge.second, wordHunt.first, wordHunt.second)
+    ) : this(word, cambridge.first, RealmList(), RealmList(), RealmList()) {
+        cambridgeDefinitions.addAll(cambridge.second)
+        translations.addAll(wordHunt.first)
+        examples.addAll(wordHunt.second)
+    }
+
+    constructor() : this("", "", RealmList(), RealmList(), RealmList())
 }

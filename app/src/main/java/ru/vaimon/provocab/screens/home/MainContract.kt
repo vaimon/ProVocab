@@ -15,9 +15,11 @@ interface MainContract {
         fun startWordSearch(word: String)
         fun onWordSearchSuccess(translation: Translation)
         fun onWordSearchFailure(reason: String)
+        fun saveWord(word: Translation)
     }
 
     interface Repository {
         fun translateWord(word: String)
+        fun saveWord(word: Translation)
     }
 }

@@ -11,6 +11,7 @@ import ru.vaimon.provocab.screens.home.fragments.ExplanationFragment
 class TranslationStateAdapter(fm: FragmentManager, lc: Lifecycle) : FragmentStateAdapter(fm, lc) {
     private val exampleFragment = ExampleFragment()
     private val explanationFragment = ExplanationFragment()
+    var currentWord: Translation? = null
 
     override fun getItemCount(): Int {
         return 2
@@ -25,6 +26,7 @@ class TranslationStateAdapter(fm: FragmentManager, lc: Lifecycle) : FragmentStat
     }
 
     fun updateValues(newData: Translation){
+        currentWord = newData
         exampleFragment.updateValues(newData.examples.toList())
         explanationFragment.updateValues(newData.translations, newData.cambridgeDefinitions)
     }
