@@ -1,5 +1,6 @@
 package ru.vaimon.provocab.screens.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -9,6 +10,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import ru.vaimon.provocab.R
 import ru.vaimon.provocab.databinding.ActivityMainBinding
 import ru.vaimon.provocab.models.Translation
+import ru.vaimon.provocab.screens.dictionary.DictionaryActivity
 import ru.vaimon.provocab.screens.home.adapters.TranslationStateAdapter
 
 class MainActivity : AppCompatActivity(), MainContract.View {
@@ -64,9 +66,24 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     }
 
+    private fun hideKeyboard(){
+        val inputMethodManager =
+            applicationContext.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(binding.etWord.windowToken, 0)
+    }
+
+    private fun startDictionaryActivity(){
+        startActivity(Intent(this, DictionaryActivity::class.java))
+    }
+
     private fun setupListeners() {
         binding.btnSearch.setOnClickListener {
+            hideKeyboard()
             mPresenter.startWordSearch(binding.etWord.text.toString())
+        }
+
+        binding.btnDictionary.setOnClickListener {
+            startDictionaryActivity()
         }
 
         binding.fragTranslation.btnSave.setOnClickListener {
@@ -76,9 +93,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         binding.etWord.setOnEditorActionListener { _, i, _ ->
             if (i == EditorInfo.IME_ACTION_SEARCH) {
                 mPresenter.startWordSearch(binding.etWord.text.toString())
-                val inputMethodManager =
-                    applicationContext.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-                inputMethodManager.hideSoftInputFromWindow(binding.etWord.windowToken, 0)
+                hideKeyboard()
                 return@setOnEditorActionListener true
             }
             return@setOnEditorActionListener false

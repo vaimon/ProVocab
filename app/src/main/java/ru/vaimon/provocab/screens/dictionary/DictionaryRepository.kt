@@ -6,6 +6,7 @@ import ru.vaimon.provocab.services.RealmService
 class DictionaryRepository(private val mPresenter: DictionaryPresenter) : DictionaryContract.Repository {
 
     override fun loadDictionary(){
-        mPresenter.onDictionaryLoaded(RealmService.fetchDictionary())
+        val res = RealmService.fetchDictionary()
+        mPresenter.onDictionaryLoaded(res)
     }
 }

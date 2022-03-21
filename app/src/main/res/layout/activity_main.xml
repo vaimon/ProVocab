@@ -6,6 +6,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".screens.home.MainActivity">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp">
+        <ImageButton
+            android:id="@+id/btnDictionary"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center_vertical|end"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/dictionary"
+            android:src="@drawable/ic_book"
+            app:tint="?colorPrimary" />
+    </FrameLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"

@@ -19,4 +19,10 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerRadius">16dp</item>
     </style>
+
+    <style name="ThemeOverlay.ProVocab.Headline" parent="Widget.AppCompat.TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>

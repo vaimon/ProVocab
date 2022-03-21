@@ -17,10 +17,9 @@
             android:layout_height="wrap_content"
             android:text="@string/cambridge_dictionary"
             android:textSize="28sp"
-            android:textStyle="bold"
-            android:fontFamily="sans-serif-medium"
+            style="@style/ThemeOverlay.ProVocab.Headline"
             android:layout_marginBottom="8dp"
-            android:textColor="@color/black"/>
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
@@ -36,10 +35,8 @@
             android:layout_height="wrap_content"
             android:text="@string/translation"
             android:textSize="28sp"
-            android:textStyle="bold"
-            android:fontFamily="sans-serif-medium"
-            android:layout_marginBottom="8dp"
-            android:textColor="@color/black"/>
+            style="@style/ThemeOverlay.ProVocab.Headline"
+            android:layout_marginBottom="8dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"

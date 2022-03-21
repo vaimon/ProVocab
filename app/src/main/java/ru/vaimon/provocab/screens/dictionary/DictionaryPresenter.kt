@@ -10,7 +10,7 @@ class DictionaryPresenter : DictionaryContract.Presenter,  BasePresenter<Diction
     private val mRepository: DictionaryContract.Repository by lazy { DictionaryRepository(this) }
 
     override fun loadDictionary(){
-
+        mRepository.loadDictionary()
     }
 
     override fun onDictionaryLoaded(newValues: RealmResults<Translation>){

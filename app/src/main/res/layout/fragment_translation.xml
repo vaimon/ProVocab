@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <FrameLayout
@@ -25,10 +26,9 @@
                 android:paddingEnd="12dp"
                 android:paddingTop="12dp"
                 android:paddingBottom="4dp"
-                android:text="proprioception"
-                android:textColor="@color/black"
-                android:textSize="32sp"
-                android:textStyle="bold" />
+                tools:text="proprioception"
+                style="@style/ThemeOverlay.ProVocab.Headline"
+                android:textSize="32sp" />
 
             <TextView
                 android:id="@+id/tvPronunciation"
@@ -37,7 +37,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
                 android:maxLines="1"
-                android:text="/bæmˈbuː.zəl/"
+                tools:text="/bæmˈbuː.zəl/"
                 android:textColor="@color/gray_inactive"
                 android:textSize="16sp" />
         </LinearLayout>

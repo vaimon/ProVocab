@@ -23,14 +23,24 @@ class DictionaryActivity : AppCompatActivity(), DictionaryContract.View {
         setContentView(binding.root)
         setupAdapters()
         setupUI()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mPresenter.attachView(this)
         mPresenter.loadDictionary()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mPresenter.detachView()
     }
 
     private fun setupAdapters() {
         wordAdapter = WordRecyclerViewAdapter()
     }
 
-    fun setupUI() {
+    private fun setupUI() {
         binding.rvWords.adapter = wordAdapter
     }
 
