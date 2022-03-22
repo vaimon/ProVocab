@@ -1,9 +1,8 @@
-package ru.vaimon.provocab.screens.home.fragments.adapters
+package ru.vaimon.provocab.views.word_review.fragments.adapters
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import ru.vaimon.provocab.R
 import ru.vaimon.provocab.databinding.ItemExampleBinding
 import ru.vaimon.provocab.models.Example
 

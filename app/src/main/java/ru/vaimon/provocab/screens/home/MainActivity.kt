@@ -6,19 +6,22 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import ru.vaimon.provocab.R
 import ru.vaimon.provocab.databinding.ActivityMainBinding
 import ru.vaimon.provocab.models.Translation
 import ru.vaimon.provocab.screens.dictionary.DictionaryActivity
-import ru.vaimon.provocab.screens.home.adapters.TranslationStateAdapter
+import ru.vaimon.provocab.views.word_review.WordReviewFragment
 
 class MainActivity : AppCompatActivity(), MainContract.View {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var translationAdapter: TranslationStateAdapter
+
     private val mPresenter: MainContract.Presenter by lazy {
         MainPresenter()
     }
+
+    private var wordReviewFragment: WordReviewFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,39 +43,19 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     private fun setupAdapters() {
-        translationAdapter =
-            TranslationStateAdapter(supportFragmentManager, lifecycle)
-        binding.fragTranslation.viewPager.adapter = translationAdapter
     }
 
     private fun setupUI() {
-//        binding.fragTranslation.tabLayout.apply {
-//            addTab(this.newTab().setText(applicationContext.getString(R.string.meanings)))
-//            addTab(this.newTab().setText(applicationContext.getString(R.string.examples)))
-//            addOnTabSelectedListener
-//        }
-        TabLayoutMediator(
-            binding.fragTranslation.tabLayout, binding.fragTranslation.viewPager
-        ) { tab, position ->
-            when (position) {
-                0 -> {
-                    tab.text = applicationContext.getString(R.string.meanings)
-                }
-                1 -> {
-                    tab.text = applicationContext.getString(R.string.examples)
-                }
-            }
-        }.attach()
 
     }
 
-    private fun hideKeyboard(){
+    private fun hideKeyboard() {
         val inputMethodManager =
             applicationContext.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(binding.etWord.windowToken, 0)
     }
 
-    private fun startDictionaryActivity(){
+    private fun startDictionaryActivity() {
         startActivity(Intent(this, DictionaryActivity::class.java))
     }
 
@@ -84,10 +67,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
         binding.btnDictionary.setOnClickListener {
             startDictionaryActivity()
-        }
-
-        binding.fragTranslation.btnSave.setOnClickListener {
-            mPresenter.saveWord(translationAdapter.currentWord ?: throw IllegalArgumentException("We don't have the word? Impossible."))
         }
 
         binding.etWord.setOnEditorActionListener { _, i, _ ->
@@ -102,19 +81,28 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun showLoadingState() {
         binding.progressIndicator.visibility = View.VISIBLE
-        binding.fragTranslation.root.visibility = View.GONE
+        binding.fragTranslation.visibility = View.GONE
     }
 
     override fun showTranslation(translation: Translation) {
-        //binding.tvResult.text = "${translation.word} ${translation.transcription} => [${translation.translations.joinToString(", ")}]\nCambridge: ${translation.cambridgeDefinitions.joinToString(separator = "\n")}\n\n${translation.examples.joinToString("\n")}"
-        translationAdapter.updateValues(translation)
-        binding.fragTranslation.tvWord.text = translation.word
-        binding.fragTranslation.tvPronunciation.text = translation.pronunciation
-        binding.fragTranslation.root.visibility = View.VISIBLE
+        wordReviewFragment?.apply {
+            this.updateData(translation)
+        } ?: run {
+            wordReviewFragment = WordReviewFragment(translation)
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fragTranslation, wordReviewFragment!!)
+                .commit()
+        }
+        binding.fragTranslation.visibility = View.VISIBLE
         binding.progressIndicator.visibility = View.GONE
     }
 
     override fun showError(reason: String) {
         binding.progressIndicator.visibility = View.GONE
+        Snackbar.make(
+            binding.root,
+            "Произошла ошибка: $reason",
+            BaseTransientBottomBar.LENGTH_SHORT
+        ).show()
     }
 }

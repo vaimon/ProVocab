@@ -1,4 +1,4 @@
-package ru.vaimon.provocab.screens.home.fragments
+package ru.vaimon.provocab.views.word_review.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import ru.vaimon.provocab.databinding.FragmentExampleBinding
 import ru.vaimon.provocab.models.Example
-import ru.vaimon.provocab.screens.home.fragments.adapters.ExampleRecyclerViewAdapter
+import ru.vaimon.provocab.views.word_review.fragments.adapters.ExampleRecyclerViewAdapter
 
 class ExampleFragment : Fragment() {
     lateinit var binding: FragmentExampleBinding

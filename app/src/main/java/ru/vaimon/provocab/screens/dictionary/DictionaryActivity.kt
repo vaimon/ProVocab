@@ -1,13 +1,11 @@
 package ru.vaimon.provocab.screens.dictionary
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import io.realm.RealmResults
 import ru.vaimon.provocab.databinding.ActivityDictionaryBinding
 import ru.vaimon.provocab.models.Translation
 import ru.vaimon.provocab.screens.dictionary.adapters.WordRecyclerViewAdapter
-import ru.vaimon.provocab.screens.home.MainContract
-import ru.vaimon.provocab.screens.home.MainPresenter
 
 class DictionaryActivity : AppCompatActivity(), DictionaryContract.View {
     private val mPresenter: DictionaryContract.Presenter by lazy {
@@ -37,14 +35,19 @@ class DictionaryActivity : AppCompatActivity(), DictionaryContract.View {
     }
 
     private fun setupAdapters() {
-        wordAdapter = WordRecyclerViewAdapter()
+        wordAdapter =
+            WordRecyclerViewAdapter(object : WordRecyclerViewAdapter.OnItemInteractionListener {
+                override fun onItemInteraction(item: Translation) {
+
+                }
+            })
     }
 
     private fun setupUI() {
         binding.rvWords.adapter = wordAdapter
     }
 
-    override fun setupValues(newValues: RealmResults<Translation>){
+    override fun setupValues(newValues: RealmResults<Translation>) {
         wordAdapter.setResults(newValues)
     }
 }

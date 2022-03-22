@@ -1,4 +1,4 @@
-package ru.vaimon.provocab.screens.home.fragments.adapters
+package ru.vaimon.provocab.views.word_review.fragments.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,12 +1,12 @@
-package ru.vaimon.provocab.screens.home.adapters
+package ru.vaimon.provocab.views.word_review.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import ru.vaimon.provocab.models.Translation
-import ru.vaimon.provocab.screens.home.fragments.ExampleFragment
-import ru.vaimon.provocab.screens.home.fragments.ExplanationFragment
+import ru.vaimon.provocab.views.word_review.fragments.ExampleFragment
+import ru.vaimon.provocab.views.word_review.fragments.ExplanationFragment
 
 class TranslationStateAdapter(fm: FragmentManager, lc: Lifecycle) : FragmentStateAdapter(fm, lc) {
     private val exampleFragment = ExampleFragment()

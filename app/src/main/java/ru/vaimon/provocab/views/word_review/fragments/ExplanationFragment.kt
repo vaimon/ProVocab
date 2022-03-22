@@ -1,4 +1,4 @@
-package ru.vaimon.provocab.screens.home.fragments
+package ru.vaimon.provocab.views.word_review.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ru.vaimon.provocab.databinding.FragmentExplanationBinding
 import ru.vaimon.provocab.models.CambridgeDefinition
-import ru.vaimon.provocab.screens.home.fragments.adapters.CambridgeRecyclerViewAdapter
-import ru.vaimon.provocab.screens.home.fragments.adapters.TranslationRecyclerViewAdapter
+import ru.vaimon.provocab.views.word_review.fragments.adapters.CambridgeRecyclerViewAdapter
+import ru.vaimon.provocab.views.word_review.fragments.adapters.TranslationRecyclerViewAdapter
 
 class ExplanationFragment : Fragment() {
     lateinit var binding: FragmentExplanationBinding

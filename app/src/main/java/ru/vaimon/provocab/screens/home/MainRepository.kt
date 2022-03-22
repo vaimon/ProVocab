@@ -98,8 +98,4 @@ class MainRepository(private val mPresenter: MainPresenter) : MainContract.Repos
 
         }
     }
-
-    override fun saveWord(word: Translation){
-        RealmService.putTranslation(word)
-    }
 }

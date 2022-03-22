@@ -79,12 +79,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragTranslation"
-            layout="@layout/fragment_translation"
-            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
 
         <ProgressBar
             android:layout_width="wrap_content"
