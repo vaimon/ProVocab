@@ -9,4 +9,12 @@ class WordReviewPresenter : WordReviewContract.Presenter,  BasePresenter<WordRev
     override fun saveWord(translation: Translation){
         mRepository.saveWord(translation)
     }
+
+    override fun deleteWord(translation: Translation){
+        mRepository.deleteWord(translation)
+    }
+
+    override fun checkWordPresence(word: String): Boolean{
+        return mRepository.checkWordPresence(word)
+    }
 }

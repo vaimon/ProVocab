@@ -72,10 +72,10 @@ class MainRepository(private val mPresenter: MainPresenter) : MainContract.Repos
         }
         CoroutineScope(Dispatchers.Main + SupervisorJob()).launch(handler) {
             val cambridgeResponseDeferred = async(Dispatchers.IO) {
-                translationService.getCambridgeWordDefinition(word.replace(" ", "-"))
+                translationService.getCambridgeWordDefinition(word)
             }
             val wordHuntResponseDeferred = async(Dispatchers.IO) {
-                translationService.getWordHuntTranslation(word.replace(" ", "%20"))
+                translationService.getWordHuntTranslation(word)
             }
             try {
                 val cambridgeResponse = cambridgeResponseDeferred.await()

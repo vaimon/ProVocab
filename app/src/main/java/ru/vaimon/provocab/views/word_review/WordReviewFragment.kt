@@ -44,7 +44,12 @@ class WordReviewFragment(var data: Translation) : Fragment(), WordReviewContract
 
     private fun setupListeners() {
         binding.btnSave.setOnClickListener {
-            mPresenter.saveWord(translationAdapter.currentWord ?: throw IllegalArgumentException("We don't have the word? Impossible."))
+            if(binding.btnSave.isChecked){
+                mPresenter.saveWord(translationAdapter.currentWord ?: throw IllegalArgumentException("We don't have the word? Impossible."))
+            } else{
+                mPresenter.deleteWord(translationAdapter.currentWord ?: throw IllegalArgumentException("We don't have the word? Impossible."))
+            }
+            //binding.btnSave.isChecked = !binding.btnSave.isChecked
         }
     }
 
@@ -70,6 +75,7 @@ class WordReviewFragment(var data: Translation) : Fragment(), WordReviewContract
         binding.tvWord.text = data.word
         binding.tvPronunciation.text = data.pronunciation
         translationAdapter.updateValues(data)
+        binding.btnSave.isChecked = mPresenter.checkWordPresence(data.word)
     }
 
     fun updateData(newData: Translation){

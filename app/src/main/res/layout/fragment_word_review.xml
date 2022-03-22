@@ -42,7 +42,7 @@
                 android:textSize="16sp" />
         </LinearLayout>
 
-        <ImageButton
+        <CheckBox
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:id="@+id/btnSave"
@@ -50,7 +50,7 @@
             android:layout_gravity="center_vertical|end"
             android:scaleType="fitCenter"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_bookmark_border" />
+            android:button="@drawable/selector_save_button" />
     </FrameLayout>
 
     <com.google.android.material.tabs.TabLayout

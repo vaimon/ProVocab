@@ -9,12 +9,15 @@ interface WordReviewContract {
     }
 
     interface Presenter : BaseContract.Presenter<View> {
-
         fun saveWord(translation: Translation)
+        fun checkWordPresence(word: String): Boolean
+        fun deleteWord(translation: Translation)
     }
 
     interface Repository {
 
         fun saveWord(word: Translation)
+        fun checkWordPresence(word: String): Boolean
+        fun deleteWord(translation: Translation)
     }
 }

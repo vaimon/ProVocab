@@ -9,7 +9,7 @@ class MainPresenter : BasePresenter<MainContract.View>(), MainContract.Presenter
     private val mRepository: MainContract.Repository by lazy { MainRepository(this) }
 
     override fun startWordSearch (word: String){
-        mRepository.translateWord(word)
+        mRepository.translateWord(word.trim())
         mView?.showLoadingState()
     }
 

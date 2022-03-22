@@ -15,4 +15,10 @@ object RealmService {
             it.copyToRealmOrUpdate(translation)
         }
     }
+
+    fun deleteTranslation(translation: Translation){
+        Realm.getDefaultInstance().executeTransactionAsync {
+            it.where(Translation::class.java).equalTo("word",translation.word).findFirst()?.deleteFromRealm()
+        }
+    }
 }
